@@ -1,6 +1,6 @@
 import { useState } from "react";
-// import axios from 'axios'; // Descomenta esto cuando tengamos la API lista
-// import { useNavigate } from 'react-router-dom'; // Descomenta esto para navegar
+import { useNavigate } from "react-router-dom"; // Descomenta esto para navegar
+import { loginUsuario } from "../../services/userService";
 
 const LoginView = () => {
   const [pin, setPin] = useState("");
@@ -34,9 +34,9 @@ const LoginView = () => {
       console.log("Simulando envío de PIN al servidor:", pin);
 
       // ---------------------------------------------------------
-      // 🚀 CONEXIÓN REAL CON EL BACKEND (PASO FUTURO)
+      // 🚀 CONEXIÓN REAL CON EL BACKEND
       // ---------------------------------------------------------
-      // const response = await axios.post('URL_DE_TU_API/api/users/login', { pin });
+      const response = await loginUsuario(pin); // Llamada real al servicio de login
 
       // Si la respuesta es exitosa (200 OK):
       // 1. Guardaríamos los datos del usuario/token en el Contexto Global
@@ -45,7 +45,7 @@ const LoginView = () => {
       // ---------------------------------------------------------
 
       // SIMULACIÓN DE ÉXITO POR AHORA (Borrar esto luego)
-      alert(`PIN ${pin} recibido (Simulación). Redirigiendo...`);
+      console.log("Login exitoso, datos del usuario:", response.data);
       // navigate('/app/mesas');
     } catch (err) {
       // Si el backend responde con 401 (Incorrecto) o 403 (Desactivado)
